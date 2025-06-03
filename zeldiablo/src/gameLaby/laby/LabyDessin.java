@@ -61,13 +61,14 @@ public class LabyDessin implements DessinJeu {
 
                 }else{
                     gc.setFill(new ImagePattern(new Image("file:labySimple/Monstre.png")));
+
                     gc.fillOval(monstre.getX() * caseWidth, monstre.getY() * caseHeight, caseWidth, caseHeight);
                 }
             }
         }
 
-        //objet (prototype)
-        gc.setFill(new ImagePattern(new Image("file:labySimple/gemme.png")));
+        //  Epee
+        gc.setFill(new ImagePattern(new Image("file:labySimple/sword1.png")));
         ArrayList<Objet> objets = labyrinthe.getObjetsList();
         if (!objets.isEmpty()) {
             for (Objet o : objets) {

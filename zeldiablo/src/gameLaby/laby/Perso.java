@@ -46,7 +46,27 @@ public class Perso implements Entites{
     }
 
     public int attaquer(){
-        return 10;
+        int res = 0;
+        int basedegats = 10;
+        Epee meilleurArme = getMeilleureArme();
+        if (meilleurArme != null) {
+            res = basedegats + meilleurArme.getDegats();
+        }else{
+            res = basedegats;
+        }
+        return res;
+    }
+
+    public Epee getMeilleureArme() {
+        Epee meilleurArme = null;
+        int maxDegats = -1;
+        for (Objet o : inventaire.getObjets()) {
+            if (o instanceof Epee arme && arme.getDegats() > maxDegats) {
+                meilleurArme = arme;
+                maxDegats = arme.getDegats();
+            }
+        }
+        return meilleurArme;
     }
 
     public void attaquerMonstres(ArrayList<Monstre> monstres){

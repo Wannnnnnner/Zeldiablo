@@ -20,9 +20,9 @@ public class Labyrinthe {
     public static final char VIDE = '.';
     public static final char FIN = 'F';
     public static final char MONSTRE = 'M';
-    public static final char OBJET = 'i';
     public static final char FANTOME = 'U';
     public static final char TROLL = 'T';
+    public static final char ARME = 'A';
 
     /**
      * constantes actions possibles
@@ -183,10 +183,11 @@ public class Labyrinthe {
                         this.monstres.add(tro);
                         num++;
                         break;
-                    case OBJET:
-                        Objet o = new Objet(colonne, numeroLigne);
-                        this.grille[colonne][numeroLigne] = o;
-                        this.objets.add(o);
+                    case ARME:
+                        Epee e = new Epee(colonne, numeroLigne, (int) Math.round(Math.random()*10+5)); // Example: 10 damage
+                        this.grille[colonne][numeroLigne] = e;
+                        this.objets.add(e);
+                        System.out.println("Arme chargée à (" + colonne + ", " + numeroLigne + ")");
                         break;
 
                     default:
