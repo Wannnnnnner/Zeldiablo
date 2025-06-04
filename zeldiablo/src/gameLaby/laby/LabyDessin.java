@@ -98,7 +98,6 @@ public class LabyDessin implements DessinJeu {
                 }
             }
         }
-
     }
 }
 

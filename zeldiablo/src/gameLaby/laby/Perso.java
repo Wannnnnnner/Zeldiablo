@@ -58,8 +58,24 @@ public class Perso implements Entites {
      * @return la valeur de l'attaque
      */
     public int attaquer() {
-        return 10;
+        int baseDegats = 10;
+        Epee meilleureArme = getMeilleureArme();
+        return meilleureArme != null ? baseDegats + meilleureArme.getValeur() : baseDegats;
     }
+
+    public Epee getMeilleureArme() {
+        Epee best = null;
+        int maxDegats = -1;
+        for (Objet o : inventaire.getObjets()) {
+            if (o instanceof Epee sword && sword.getValeur() > maxDegats) {
+                best = sword;
+                maxDegats = sword.getValeur();
+            }
+        }
+        return best;
+    }
+
+
 
     /**
      * Attaque les monstres autour du personnage.

@@ -48,7 +48,7 @@ public class Inventaire {
 
     /**
      * toString de l'inventaire
-     * @return Iventaire sous forme de chaîne de caractères
+     * @return Inventaire sous forme de chaîne de caractères
      */
     @Override
     public String toString() {
