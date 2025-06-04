@@ -7,7 +7,7 @@ public class Niveaux {
     /**
      * La liste des fichiers de niveaux.
      */
-    public static final String[] liste1 = {"laby10.txt", "laby11.txt", "laby12.txt", "laby13.txt"};
+    public static final String[] liste1 = {"laby10.txt", "laby11.txt", "laby12.txt"};
 
     /**
      * Le tableau courant des niveaux.
