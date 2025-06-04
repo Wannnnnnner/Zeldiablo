@@ -69,8 +69,10 @@ public abstract class Monstre implements Entites {
         }
 
         if (!verifColision(nextX, nextY)) {
+            laby.grille[this.x][this.y] = false;
             this.x = nextX;
             this.y = nextY;
+            laby.grille[this.x][this.y] = this;
         }
     }
 
