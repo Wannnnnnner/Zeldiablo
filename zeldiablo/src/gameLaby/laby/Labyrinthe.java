@@ -255,35 +255,32 @@ public class Labyrinthe {
 
 
     public void actionMonstres() {
-        int x = pj.getX();
-        int y = pj.getY();
-
-        ArrayList<Monstre> monstresStop = new ArrayList<>();
-
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-                int cx = x + i;
-                int cy = y + j;
-                if(cx>-1 && cy>-1 && cx< grille.length && cy< grille[0].length) {
-                    if (grille[cx][cy] instanceof Monstre m) {
-                        if (m.getVie() <= 0) {
-                            monstres.remove(m);
-                        }
-                        else {
-                            monstresStop.add(m);
-                            pj.recevoirDegats(m.attaquer());
-                            //System.out.println("Vie diminuée : " + pj.getVie());
+        ArrayList<Monstre> monstresMorts = new ArrayList<>();
+        for (Monstre m : monstres) {
+            if (m.getVie() <= 0) {
+                monstresMorts.add(m);
+            } else {
+                boolean persoTrouve = false;
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        if (m.verifPerso(m.getX() + i, m.getY() + j)) {
+                            persoTrouve = true;
                         }
                     }
                 }
+                // deplacement
+                if (!persoTrouve) {
+                    m.deplacerRandom();
+                }
+                // attaque
+                else {
+                    pj.recevoirDegats(m.attaquer());
+                    System.out.println("Vie diminuée : " + pj.getVie());
+                }
             }
         }
-
-        for (Monstre m : monstres) {
-            // deplacement
-            if (!monstresStop.contains(m)) {
-                m.deplacerRandom();
-            }
+        for (Monstre m : monstresMorts) {
+            monstres.remove(m);
         }
     }
 
