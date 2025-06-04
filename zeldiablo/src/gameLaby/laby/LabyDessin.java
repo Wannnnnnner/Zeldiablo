@@ -21,7 +21,7 @@ public class LabyDessin implements DessinJeu {
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
         // fond
-        gc.setFill(new ImagePattern(new Image("file:zeldiablo/labySimple/Sol.png")));
+        gc.setFill(new ImagePattern(new Image("file:labySimple/Sol.png")));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         Labyrinthe labyrinthe = laby.getLaby();
@@ -29,7 +29,7 @@ public class LabyDessin implements DessinJeu {
         double caseHeight = canvas.getHeight() / labyrinthe.getLengthY();
 
         // murs
-        gc.setFill(new ImagePattern(new Image("file:zeldiablo/labySimple/Mur.png")));
+        gc.setFill(new ImagePattern(new Image("file:labySimple/Mur.png")));
         for (int y = 0; y < labyrinthe.getLengthY(); y++) {
             for (int x = 0; x < labyrinthe.getLength(); x++) {
                 if (labyrinthe.getMur(x, y)) {
@@ -39,12 +39,12 @@ public class LabyDessin implements DessinJeu {
         }
 
         // perso
-        gc.setFill(new ImagePattern(new Image("file:zeldiablo/labySimple/perso.png")));
+        gc.setFill(new ImagePattern(new Image("file:labySimple/perso.png")));
         Perso perso = labyrinthe.getPj();
         gc.fillOval(perso.getX() * caseWidth, perso.getY() * caseHeight, caseWidth, caseHeight);
 
         // fin
-        gc.setFill(new ImagePattern(new Image("file:zeldiablo/labySimple/echelle.png")));
+        gc.setFill(new ImagePattern(new Image("file:labySimple/echelle.png")));
         Fin fin = labyrinthe.getFin();
         gc.fillRect(fin.getX() * caseWidth, fin.getY() * caseHeight, caseWidth, caseHeight);
 
@@ -52,15 +52,15 @@ public class LabyDessin implements DessinJeu {
         if (!monstres.isEmpty()) {
             for (Monstre monstre : monstres) {
                 if(monstre instanceof Fantome){
-                    gc.setFill(new ImagePattern(new Image("file:zeldiablo/labySimple/fant.png")));
+                    gc.setFill(new ImagePattern(new Image("file:labySimple/fant.png")));
                     gc.fillOval(monstre.getX() * caseWidth, monstre.getY() * caseHeight, caseWidth, caseHeight);
 
                 }else if(monstre instanceof Troll){
-                    gc.setFill(new ImagePattern(new Image("file:zeldiablo/labySimple/troll.png")));
+                    gc.setFill(new ImagePattern(new Image("file:labySimple/troll.png")));
                     gc.fillOval(monstre.getX() * caseWidth, monstre.getY() * caseHeight, caseWidth, caseHeight);
 
                 }else{
-                    gc.setFill(new ImagePattern(new Image("file:zeldiablo/labySimple/Monstre.png")));
+                    gc.setFill(new ImagePattern(new Image("file:labySimple/Monstre.png")));
 
                     gc.fillOval(monstre.getX() * caseWidth, monstre.getY() * caseHeight, caseWidth, caseHeight);
                 }
@@ -68,7 +68,7 @@ public class LabyDessin implements DessinJeu {
         }
 
         //  Epee
-        gc.setFill(new ImagePattern(new Image("file:zeldiablo/labySimple/sword1.png")));
+        gc.setFill(new ImagePattern(new Image("file:labySimple/sword1.png")));
         ArrayList<Objet> objets = labyrinthe.getObjetsList();
         if (!objets.isEmpty()) {
             for (Objet o : objets) {

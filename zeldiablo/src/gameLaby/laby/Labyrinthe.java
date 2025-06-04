@@ -23,6 +23,7 @@ public class Labyrinthe {
     public static final char FANTOME = 'U';
     public static final char TROLL = 'T';
     public static final char ARME = 'A';
+    public static final char BOUCLIER = 'B';
 
     /**
      * constantes actions possibles
@@ -188,6 +189,13 @@ public class Labyrinthe {
                         this.grille[colonne][numeroLigne] = e;
                         this.objets.add(e);
                         System.out.println("Arme chargée à (" + colonne + ", " + numeroLigne + ")");
+                        break;
+
+                    case BOUCLIER:
+                        Bouclier b = new Bouclier(colonne, numeroLigne, (int) Math.round(Math.random()*20+5)); // Example: 10 damage
+                        this.grille[colonne][numeroLigne] = b;
+                        this.objets.add(b);
+                        System.out.println("Bouclier chargée à (" + colonne + ", " + numeroLigne + ")");
                         break;
 
                     default:

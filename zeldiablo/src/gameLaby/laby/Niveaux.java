@@ -7,13 +7,13 @@ public class Niveaux {
     public static boolean fini = false;
 
     public static String charger(){
-        return "zeldiablo/labySimple/"+courant[lvl];
+        return "labySimple/"+courant[lvl];
     }
 
     public static String chargerSuivant(){
         lvl++;
         if(lvl>=courant.length){lvl=0;}
         fini = false;
-        return "zeldiablo/labySimple/"+courant[lvl];
+        return "labySimple/"+courant[lvl];
     }
 }

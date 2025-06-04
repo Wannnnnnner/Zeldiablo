@@ -19,6 +19,12 @@ public class Inventaire {
         }
     }
 
+    public void supprimerObjet(Objet objet) {
+        if (objet != null) {
+            objets.remove(objet);
+        }
+    }
+
     /**
      *
      * @return
