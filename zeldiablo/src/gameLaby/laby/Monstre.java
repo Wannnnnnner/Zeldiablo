@@ -110,6 +110,60 @@ public abstract class Monstre implements Entites {
         }
     }
 
+    public void deplacerVolDOiseau(int x, int y){
+        int deplacementHorizontal = 0;
+        int deplacementVertical = 0;
+        if(this.x - x < 0){
+            deplacementHorizontal = 1;
+        }
+        else if(this.x - x > 0){
+            deplacementHorizontal = -1;
+        }
+
+        if(this.y - y < 0){
+            deplacementVertical = 1;
+        }
+        else if(this.y - y > 0){
+            deplacementVertical = -1;
+        }
+
+        int nextX = this.x + deplacementHorizontal;
+        int nextY = this.y + deplacementVertical;
+
+        if(!verifColision(nextX,nextY)){
+            System.out.println("diagonal");
+            laby.grille[this.x][this.y] = false;
+            this.x = nextX;
+            this.y = nextY;
+            laby.grille[this.x][this.y] = this;
+        }
+
+        else {
+            Random randX = new Random();
+            if (randX.nextBoolean()) {
+                if (!verifColision(nextX, this.y)) {
+                    System.out.println("horizontal");
+                    laby.grille[this.x][this.y] = false;
+                    this.x = nextY;
+                    laby.grille[this.x][this.y] = this;
+                }
+            }
+
+            else {
+                if (!verifColision(this.x , nextY)) {
+                    System.out.println("vertical");
+                    laby.grille[this.x][this.y] = false;
+                    this.x = nextX;
+                    laby.grille[this.x][this.y] = this;
+                }
+            }
+
+        }
+
+
+
+    }
+
     /**
      * Vérifie s’il y a une collision à la position (x, y).
      *

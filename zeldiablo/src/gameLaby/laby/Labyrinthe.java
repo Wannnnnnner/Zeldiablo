@@ -219,7 +219,7 @@ public class Labyrinthe {
                     }
                 }
                 if (!persoTrouve) {
-                    m.deplacerRandom();
+                    m.deplacerVolDOiseau(pj.getX(), pj.getY());
                 } else {
                     pj.recevoirDegats(m.attaquer());
                     System.out.println("Vie diminuée : " + pj.getVie());
