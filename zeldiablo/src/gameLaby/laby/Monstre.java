@@ -131,7 +131,6 @@ public abstract class Monstre implements Entites {
         int nextY = this.y + deplacementVertical;
 
         if(!verifColision(nextX,nextY)){
-            System.out.println("diagonal");
             laby.grille[this.x][this.y] = false;
             this.x = nextX;
             this.y = nextY;
@@ -142,7 +141,6 @@ public abstract class Monstre implements Entites {
             Random randX = new Random();
             if (randX.nextBoolean()) {
                 if (!verifColision(nextX, this.y)) {
-                    System.out.println("horizontal");
                     laby.grille[this.x][this.y] = false;
                     this.x = nextY;
                     laby.grille[this.x][this.y] = this;
@@ -151,7 +149,6 @@ public abstract class Monstre implements Entites {
 
             else {
                 if (!verifColision(this.x , nextY)) {
-                    System.out.println("vertical");
                     laby.grille[this.x][this.y] = false;
                     this.x = nextX;
                     laby.grille[this.x][this.y] = this;

@@ -64,7 +64,7 @@ public class LabyJeu implements Jeu {
             System.out.println(laby.getPj().toString());
         }
 
-        if (nbFrame == 4) {
+        if (nbFrame == 10) {
             laby.actionMonstres();
             nbFrame = 0;
         }
