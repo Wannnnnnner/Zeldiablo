@@ -99,7 +99,55 @@ public class LabyDessin implements DessinJeu {
             }
         }
 
+        /**
+         * /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
+         *
+         *
+         * Ici l'implementation d'inventaire a slot non terminé au moment du passage à l'oral
+         *
+         *
+         * /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
+         */
+        double slotSize = canvas.getWidth() / 20;
+        double startX = (canvas.getWidth() - 6 * slotSize) / 2;
+        double startY = canvas.getHeight() - slotSize - 10;
+        ArrayList<Objet> inventaire = perso.getInventaire().getObjets();
+        Epee bestWeapon = perso.getMeilleureArme();
+        Bouclier bestShield = perso.getMeilleureBouclier();
 
+        for (int i = 0; i < 6; i++) {
+            gc.setFill(Color.BLACK);
+            gc.fillRect(startX + i * slotSize, startY, slotSize, slotSize);
+            gc.setStroke(Color.WHITE);
+            gc.strokeRect(startX + i * slotSize, startY, slotSize, slotSize);
+
+            if (i < inventaire.size()) {
+                Objet item = inventaire.get(i);
+                if (item instanceof Epee) {
+                    if(item.getValeur()>10){
+                        gc.setFill(new ImagePattern(new Image("file:labySimple/sword2.png")));
+                    }else{
+                        gc.setFill(new ImagePattern(new Image("file:labySimple/sword1.png")));
+                    }
+                } else if (item instanceof Bouclier) {
+                    if(item.getValeur()>20){
+                        gc.setFill(new ImagePattern(new Image("file:labySimple/shield2.png")));
+                    }else{
+                        gc.setFill(new ImagePattern(new Image("file:labySimple/shield1.png")));
+                    }
+                } else {
+                    gc.setFill(Color.GRAY);
+               }
+
+                if (item instanceof Epee) {
+                    gc.fillRect(startX + i * slotSize + slotSize * 0.2, startY + slotSize * 0.2, slotSize * 0.6, slotSize * 0.6);
+                } else if (item instanceof Bouclier) {
+                    gc.fillOval(startX + i * slotSize + slotSize * 0.2, startY + slotSize * 0.2, slotSize * 0.6, slotSize * 0.6);
+                } else {
+                    gc.fillRect(startX + i * slotSize + slotSize * 0.2, startY + slotSize * 0.2, slotSize * 0.6, slotSize * 0.6);
+                }
+            }
+        }
     }
 }
 
