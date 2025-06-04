@@ -84,7 +84,7 @@ public class LabyDessin implements DessinJeu {
                         }
 
                     } else if (o instanceof Bouclier) {
-                        if(o.getValeur()>10){
+                        if(o.getValeur()>20){
                             image = new Image("file:labySimple/shield2.png");
                         }else {
                             image = new Image("file:labySimple/shield1.png");
@@ -98,6 +98,8 @@ public class LabyDessin implements DessinJeu {
                 }
             }
         }
+
+
     }
 }
 
