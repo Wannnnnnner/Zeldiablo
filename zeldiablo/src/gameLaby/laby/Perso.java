@@ -46,40 +46,24 @@ public class Perso implements Entites{
     }
 
     public int attaquer(){
-        int res = 0;
-        int basedegats = 10;
-        Epee meilleurArme = getMeilleureArme();
-        if (meilleurArme != null) {
-            res = basedegats + meilleurArme.getDegats();
-        }else{
-            res = basedegats;
-        }
-        return res;
+        return 10;
     }
 
-    public Epee getMeilleureArme() {
-        Epee meilleurArme = null;
-        int maxDegats = -1;
-        for (Objet o : inventaire.getObjets()) {
-            if (o instanceof Epee arme && arme.getDegats() > maxDegats) {
-                meilleurArme = arme;
-                maxDegats = arme.getDegats();
-            }
-        }
-        return meilleurArme;
-    }
-
-    public void attaquerMonstres(ArrayList<Monstre> monstres){
-        for (Monstre m : monstres) {
-            for (int i = -1; i <= 1; i++) {
-                for (int j = -1; j <= 1; j++) {
-                    if (m.verifPerso(m.getX() + i, m.getY() + j)) {
-                        m.recevoirDegats(this.attaquer());
-                        System.out.println("Monstre "+m.toString()+" a reçu dégâts : "+m.getVie());
-                    }
+    public void attaquerMonstres(Object[][] grille){
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int cx = x + i;
+                int cy = y + j;
+                if(cx>-1 && cy+j>-1 && cx< grille.length && cy< grille[0].length) {
+                    if (grille[cx][cy] instanceof Monstre) {
+                        ((Monstre) grille[cx][cy]).recevoirDegats(this.attaquer());}
                 }
             }
         }
+    }
+
+    public boolean verifMonstre(int x, int y) {
+        return x == this.x && y == this.y;
     }
 
     public void recevoirDegats(int pv){

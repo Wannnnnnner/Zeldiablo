@@ -237,16 +237,18 @@ public class Labyrinthe {
                 }
             }
             if(!trouve) {
-                // on met a jour personnage
+                this.grille[suivante[0]][suivante[1]] = false;
                 this.pj.setX(suivante[0]);
                 this.pj.setY(suivante[1]);
+                this.grille[suivante[0]][suivante[1]] = this.pj;
             }
         }
         else{
             if (!murs.contains(grille[suivante[0]][suivante[1]] )) {
-                // on met a jour personnage
+                this.grille[suivante[0]][suivante[1]] = false;
                 this.pj.setX(suivante[0]);
                 this.pj.setY(suivante[1]);
+                this.grille[suivante[0]][suivante[1]] = this.pj;
             }
         }
     }

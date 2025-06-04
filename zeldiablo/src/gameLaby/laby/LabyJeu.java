@@ -21,7 +21,7 @@ public class LabyJeu implements Jeu {
     public void update(double secondes, Clavier clavier) throws IOException {
         nbFrame++;
         if(clavier.attaquer){
-            this.laby.getPj().attaquerMonstres(this.laby.getMonstres());
+            this.laby.getPj().attaquerMonstres(this.laby.grille);
         }else if (clavier.droite) {
             this.laby.deplacerPerso(Labyrinthe.DROITE);
         }else if (clavier.gauche) {
