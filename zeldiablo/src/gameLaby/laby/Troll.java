@@ -9,4 +9,9 @@ public class Troll extends Monstre{
     public int attaquer(){
         return 20;
     }
+
+    public boolean getTraverse(){
+        return traverse;
+    }
+
 }

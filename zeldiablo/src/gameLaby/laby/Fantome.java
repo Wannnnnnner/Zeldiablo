@@ -11,5 +11,9 @@ public class Fantome extends Monstre{
         return 5;
     }
 
+    public boolean getTraverse(){
+        return traverse;
+    }
+
 
 }
