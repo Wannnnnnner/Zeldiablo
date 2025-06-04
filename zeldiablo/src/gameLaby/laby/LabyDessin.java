@@ -67,17 +67,26 @@ public class LabyDessin implements DessinJeu {
             }
         }
 
-        //  Epee
-        gc.setFill(new ImagePattern(new Image("file:labySimple/sword1.png")));
+        //  Epee et Bouclier
         ArrayList<Objet> objets = labyrinthe.getObjetsList();
         if (!objets.isEmpty()) {
             for (Objet o : objets) {
                 if (!o.estPris) {
+                    Image image;
+                    if (o instanceof Epee) {
+                        image = new Image("file:labySimple/sword1.png");
+                    } else if (o instanceof Bouclier) {
+                        image = new Image("file:labySimple/gemme.png");
+                    } else {
+                        continue; // objet inconnu, on saute
+                    }
+
+                    gc.setFill(new ImagePattern(image));
                     gc.fillOval(o.getX() * caseWidth, o.getY() * caseHeight, caseWidth, caseHeight);
                 }
-
             }
         }
+
     }
 }
 
