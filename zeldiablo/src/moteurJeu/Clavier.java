@@ -49,11 +49,12 @@ public class Clavier {
 
             // si touche TAB
             case TAB:
-                if (this.sac) {
-                    this.sac = false;
-                }else{
-                    this.sac = true;
-                }
+                this.sac = true;
+                //if (this.sac) {
+                //    this.sac = false;
+                //}else{
+                //    this.sac = true;
+                //}
                 break;
             // si touche ESPACE
             case SPACE:
@@ -99,6 +100,11 @@ public class Clavier {
             // si touche ESPACE
             case SPACE:
                 this.attaquer = false;
+                break;
+
+            //A enlevé après
+            case TAB:
+                this.sac = false;
                 break;
         }
     }
