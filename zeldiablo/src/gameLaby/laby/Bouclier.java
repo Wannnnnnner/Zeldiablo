@@ -7,7 +7,7 @@ public class Bouclier extends Objet {
         super(x, y);
         this.type = "Bouclier";
         this.protection = protection;
-        this.description = "Une bouclier avec " + protection + " de protection";
+        this.description = "Une bouclier avec " + protection + " de protection quand tu la trouvé";
     }
 
     @Override

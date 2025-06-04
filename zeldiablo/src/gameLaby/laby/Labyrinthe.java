@@ -192,7 +192,7 @@ public class Labyrinthe {
                         break;
 
                     case BOUCLIER:
-                        Bouclier b = new Bouclier(colonne, numeroLigne, (int) Math.round(Math.random()*20+5)); // Example: 10 damage
+                        Bouclier b = new Bouclier(colonne, numeroLigne, (int) Math.round(Math.random()*20+10)); // Example: 10 damage
                         this.grille[colonne][numeroLigne] = b;
                         this.objets.add(b);
                         System.out.println("Bouclier chargée à (" + colonne + ", " + numeroLigne + ")");
