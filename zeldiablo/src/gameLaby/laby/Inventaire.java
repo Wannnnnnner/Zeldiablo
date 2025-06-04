@@ -2,16 +2,23 @@ package gameLaby.laby;
 
 import java.util.ArrayList;
 
+/**
+ * La classe Inventaire.
+ */
 public class Inventaire {
     private ArrayList<Objet> objets;
 
+    /**
+     * Instancie un nouvel Inventaire
+     */
     public Inventaire() {
         this.objets = new ArrayList<>();
     }
 
     /**
-     * Adds an object to the inventory.
-     * @param objet The object to add.
+     * Ajoute un objet a l'inventaire
+     *
+     * @param objet L'objet a ajouter
      */
     public void ajouterObjet(Objet objet) {
         if (objet != null) {
@@ -19,6 +26,11 @@ public class Inventaire {
         }
     }
 
+    /**
+     * Supprimer objet.
+     *
+     * @param objet L'objet a supprimer
+     */
     public void supprimerObjet(Objet objet) {
         if (objet != null) {
             objets.remove(objet);
@@ -26,16 +38,17 @@ public class Inventaire {
     }
 
     /**
+     * Getter des objets
      *
-     * @return
+     * @return objets
      */
     public ArrayList<Objet> getObjets() {
         return objets;
     }
 
     /**
-     *
-     * @return
+     * toString de l'inventaire
+     * @return Iventaire sous forme de chaîne de caractères
      */
     @Override
     public String toString() {

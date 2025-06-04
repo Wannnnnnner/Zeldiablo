@@ -6,6 +6,12 @@ import java.io.IOException;
  * charge et affiche un labyrinthe
  */
 public class Main {
+    /**
+     * Le point d'entree de l'application
+     *
+     * @param args les arguments
+     * @throws IOException l'IOException
+     */
     public static void main(String[] args) throws IOException {
 
         // charge le labyrinthe

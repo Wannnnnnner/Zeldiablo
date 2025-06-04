@@ -1,8 +1,18 @@
 package gameLaby.laby;
 
+/**
+ * La classe Epee.
+ */
 public class Epee extends Objet {
     private int degats;
 
+    /**
+     * Istancie une nouvelle Epee.
+     *
+     * @param x      abscisse
+     * @param y      ordonnee
+     * @param degats les degats
+     */
     public Epee(int x, int y, int degats) {
         super(x, y);
         this.type = "Épée";

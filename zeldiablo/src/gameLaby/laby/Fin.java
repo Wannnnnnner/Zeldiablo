@@ -38,6 +38,8 @@ public class Fin implements Entites{
     // ############################################
 
     /**
+     * Gets x.
+     *
      * @return position x du personnage
      */
     public int getX() {
@@ -46,6 +48,8 @@ public class Fin implements Entites{
     }
 
     /**
+     * Gets y.
+     *
      * @return position y du personnage
      */
     public int getY() {
@@ -53,10 +57,20 @@ public class Fin implements Entites{
         return this.y;
     }
 
+    /**
+     * Setter de x.
+     *
+     * @param x l'abscisse
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Setter de y.
+     *
+     * @param y l'ordonnee
+     */
     public void setY(int y) {
         this.y = y;
     }

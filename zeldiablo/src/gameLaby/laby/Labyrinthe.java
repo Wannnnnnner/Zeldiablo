@@ -6,14 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * classe labyrinthe. represente un labyrinthe avec
- * <ul> des murs </ul>
- * <ul> un personnage (x,y) </ul>
+ * Classe Labyrinthe. Représente un labyrinthe avec :
+ * <ul>
+ *     <li>des murs</li>
+ *     <li>un personnage (x,y)</li>
+ * </ul>
  */
 public class Labyrinthe {
 
     /**
-     * Constantes char
+     * Constantes de caractères représentant les éléments du labyrinthe.
      */
     public static final char MUR = 'X';
     public static final char PJ = 'P';
@@ -26,7 +28,7 @@ public class Labyrinthe {
     public static final char BOUCLIER = 'B';
 
     /**
-     * constantes actions possibles
+     * Constantes des actions possibles.
      */
     public static final String HAUT = "Haut";
     public static final String BAS = "Bas";
@@ -36,88 +38,60 @@ public class Labyrinthe {
     public static final String SAC = "TAB";
 
     /**
-     * attribut du personnage
+     * Le personnage joueur.
      */
     private Perso pj;
 
     /**
-     * attribut de la case de fin
+     * La case de fin du labyrinthe.
      */
     private Fin fin;
 
     private ArrayList<Monstre> monstres;
-
-
     private ArrayList<Objet> objets;
-
-
     private ArrayList<Mur> murs;
 
     /**
-     * les murs du labyrinthe
+     * Grille représentant le labyrinthe.
      */
     public Object[][] grille;
 
     /**
-     * retourne la case suivante selon une actions
+     * Calcule la case suivante en fonction d'une action.
      *
-     * @param x      case depart
-     * @param y      case depart
-     * @param action action effectuee
-     * @return case suivante
+     * @param x      coordonnée x de départ
+     * @param y      coordonnée y de départ
+     * @param action action à effectuer
+     * @return tableau contenant les coordonnées de la case suivante
      */
     static int[] getSuivant(int x, int y, String action) {
         switch (action) {
-            case HAUT:
-                // on monte une ligne
-                y--;
-                break;
-            case BAS:
-                // on descend une ligne
-                y++;
-                break;
-            case DROITE:
-                // on augmente colonne
-                x++;
-                break;
-            case GAUCHE:
-                // on diminue colonne
-                x--;
-                break;
-
-            case SAC:
-                //On ouvre l'inventaire
-                System.out.println("sac");
-                break;
-
-            case RECUP:
-                break;
-            default:
-                throw new Error("action inconnue");
+            case HAUT -> y--;
+            case BAS -> y++;
+            case DROITE -> x++;
+            case GAUCHE -> x--;
+            case SAC -> System.out.println("sac");
+            case RECUP -> {}
+            default -> throw new Error("action inconnue");
         }
         int[] res = {x, y};
         return res;
     }
 
     /**
-     * charge le labyrinthe
+     * Constructeur : charge un labyrinthe à partir d’un fichier.
      *
-     * @param nom nom du fichier de labyrinthe
-     * @return labyrinthe cree
-     * @throws IOException probleme a la lecture / ouverture
+     * @param nom   nom du fichier contenant le labyrinthe
+     * @param perso personnage joueur à placer dans le labyrinthe
+     * @throws IOException en cas de problème de lecture du fichier
      */
     public Labyrinthe(String nom, Perso perso) throws IOException {
-        // ouvrir fichier
         FileReader fichier = new FileReader(nom);
         BufferedReader bfRead = new BufferedReader(fichier);
 
-        int nbLignes, nbColonnes;
-        // lecture nblignes
-        nbLignes = Integer.parseInt(bfRead.readLine());
-        // lecture nbcolonnes
-        nbColonnes = Integer.parseInt(bfRead.readLine());
+        int nbLignes = Integer.parseInt(bfRead.readLine());
+        int nbColonnes = Integer.parseInt(bfRead.readLine());
 
-        // creation labyrinthe vide
         this.grille = new Object[nbColonnes][nbLignes];
         this.pj = null;
         this.fin = null;
@@ -125,126 +99,100 @@ public class Labyrinthe {
         this.objets = new ArrayList<>();
         this.murs = new ArrayList<>();
 
-        // lecture des cases
         String ligne = bfRead.readLine();
-
-        // stocke les indices courants
         int numeroLigne = 0;
 
-        // parcours le fichier
         while (ligne != null) {
-
-            // parcours de la ligne
             int num = 0;
             for (int colonne = 0; colonne < ligne.length(); colonne++) {
                 char c = ligne.charAt(colonne);
                 switch (c) {
-                    case MUR:
+                    case MUR -> {
                         Mur m = new Mur(colonne, numeroLigne);
-                        this.grille[colonne][numeroLigne] = m ;
+                        this.grille[colonne][numeroLigne] = m;
                         this.murs.add(m);
-                        break;
-                    case VIDE:
-                        this.grille[colonne][numeroLigne] = false;
-                        break;
-                    case FIN:
+                    }
+                    case VIDE -> this.grille[colonne][numeroLigne] = false;
+                    case FIN -> {
                         Fin f = new Fin(colonne, numeroLigne);
                         this.grille[colonne][numeroLigne] = f;
                         this.fin = f;
-                        break;
-                    case PJ:
-                        if (perso!= null) {
+                    }
+                    case PJ -> {
+                        if (perso != null) {
                             System.out.println("====================================================");
                             perso.setX(colonne);
                             perso.setY(numeroLigne);
                             this.pj = perso;
                             break;
                         }
-                        Perso p = new Perso(colonne, numeroLigne,100);
-                        // pas de mur
+                        Perso p = new Perso(colonne, numeroLigne, 100);
                         this.grille[colonne][numeroLigne] = p;
-                        // ajoute PJ
                         this.pj = p;
-                        break;
-                    case MONSTRE:
-                        Monstre m2 = new MonstreSimple(colonne, numeroLigne,10,this);
+                    }
+                    case MONSTRE -> {
+                        Monstre m2 = new MonstreSimple(colonne, numeroLigne, 10, this);
                         this.grille[colonne][numeroLigne] = m2;
                         this.monstres.add(m2);
                         num++;
-                        break;
-                    case FANTOME:
-                        Monstre fa = new Fantome(colonne, numeroLigne,10,this);
+                    }
+                    case FANTOME -> {
+                        Monstre fa = new Fantome(colonne, numeroLigne, 10, this);
                         this.grille[colonne][numeroLigne] = fa;
                         this.monstres.add(fa);
                         num++;
-                        break;
-                    case TROLL:
-                        Monstre tro = new Troll(colonne, numeroLigne,10,this);
+                    }
+                    case TROLL -> {
+                        Monstre tro = new Troll(colonne, numeroLigne, 10, this);
                         this.grille[colonne][numeroLigne] = tro;
                         this.monstres.add(tro);
                         num++;
-                        break;
-                    case ARME:
-                        Epee e = new Epee(colonne, numeroLigne, (int) Math.round(Math.random()*10+5)); // Example: 10 damage
+                    }
+                    case ARME -> {
+                        Epee e = new Epee(colonne, numeroLigne, (int) Math.round(Math.random() * 10 + 5));
                         this.grille[colonne][numeroLigne] = e;
                         this.objets.add(e);
                         System.out.println("Arme chargée à (" + colonne + ", " + numeroLigne + ")");
-                        break;
-
-                    case BOUCLIER:
-                        Bouclier b = new Bouclier(colonne, numeroLigne, (int) Math.round(Math.random()*20+10)); // Example: 10 damage
+                    }
+                    case BOUCLIER -> {
+                        Bouclier b = new Bouclier(colonne, numeroLigne, (int) Math.round(Math.random() * 20 + 10));
                         this.grille[colonne][numeroLigne] = b;
                         this.objets.add(b);
-                        System.out.println("Bouclier chargée à (" + colonne + ", " + numeroLigne + ")");
-                        break;
-
-                    default:
-                        throw new Error("caractere inconnu " + c);
+                        System.out.println("Bouclier chargé à (" + colonne + ", " + numeroLigne + ")");
+                    }
+                    default -> throw new Error("caractère inconnu " + c);
                 }
             }
-
-            // lecture
             ligne = bfRead.readLine();
             numeroLigne++;
         }
-
-        // ferme fichier
         bfRead.close();
     }
 
-
-
     /**
-     * deplace le personnage en fonction de l'action.
-     * gere la collision avec les murs
+     * Déplace le personnage en fonction de l’action, en gérant les collisions.
      *
      * @param action une des actions possibles
      */
     public void deplacerPerso(String action) {
-        // case courante
         int[] courante = {this.pj.getX(), this.pj.getY()};
-
-        // calcule case suivante
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
-        // si c'est pas un mur, on effectue le deplacement
-        if(!monstres.isEmpty()) {
+        if (!monstres.isEmpty()) {
             boolean trouve = false;
-            for(Monstre m : monstres) {
-
-                if (m.etrePresent(suivante[0], suivante[1]) || murs.contains(grille[suivante[0]][suivante[1]] ) ) {
+            for (Monstre m : monstres) {
+                if (m.etrePresent(suivante[0], suivante[1]) || murs.contains(grille[suivante[0]][suivante[1]])) {
                     trouve = true;
                 }
             }
-            if(!trouve) {
+            if (!trouve) {
                 this.grille[suivante[0]][suivante[1]] = false;
                 this.pj.setX(suivante[0]);
                 this.pj.setY(suivante[1]);
                 this.grille[suivante[0]][suivante[1]] = this.pj;
             }
-        }
-        else{
-            if (!murs.contains(grille[suivante[0]][suivante[1]] )) {
+        } else {
+            if (!murs.contains(grille[suivante[0]][suivante[1]])) {
                 this.grille[suivante[0]][suivante[1]] = false;
                 this.pj.setX(suivante[0]);
                 this.pj.setY(suivante[1]);
@@ -253,7 +201,9 @@ public class Labyrinthe {
         }
     }
 
-
+    /**
+     * Exécute les actions de chaque monstre : déplacement ou attaque.
+     */
     public void actionMonstres() {
         ArrayList<Monstre> monstresMorts = new ArrayList<>();
         for (Monstre m : monstres) {
@@ -268,12 +218,9 @@ public class Labyrinthe {
                         }
                     }
                 }
-                // deplacement
                 if (!persoTrouve) {
                     m.deplacerRandom();
-                }
-                // attaque
-                else {
+                } else {
                     pj.recevoirDegats(m.attaquer());
                     System.out.println("Vie diminuée : " + pj.getVie());
                 }
@@ -285,44 +232,40 @@ public class Labyrinthe {
     }
 
     /**
-     * jamais fini
+     * Vérifie si le jeu est terminé.
      *
-     * @return fin du jeu
+     * @return vrai si le personnage est sur la case de fin
      */
     public boolean etreFini() {
         return fin.getX() == pj.getX() && fin.getY() == pj.getY();
     }
 
     // ##################################
-    // GETTER
+    // GETTERS / SETTERS
     // ##################################
 
     /**
-     * return taille selon Y
-     *
-     * @return
+     * @return la taille verticale (Y) de la grille
      */
     public int getLengthY() {
         return grille[0].length;
     }
 
     /**
-     * return taille selon X
-     *
-     * @return
+     * @return la taille horizontale (X) de la grille
      */
     public int getLength() {
         return grille.length;
     }
 
     /**
-     * return mur en (i,j)
-     * @param x
-     * @param y
-     * @return
+     * Vérifie s’il y a un mur à la position (x, y).
+     *
+     * @param x colonne
+     * @param y ligne
+     * @return vrai si mur présent
      */
     public boolean getMur(int x, int y) {
-        // utilise le tableau de boolean
         boolean trouve = false;
         for (Mur m : murs) {
             if (m.etrePresent(x, y)) {
@@ -332,36 +275,38 @@ public class Labyrinthe {
         return trouve;
     }
 
-    //
-    public void recup(){
+    /**
+     * Permet au personnage de récupérer un objet sur sa case.
+     */
+    public void recup() {
         System.out.println(pj.toString());
         for (Objet i : objets) {
-            if(i.etrePresent(pj.getX(), pj.getY()) && !i.getEstPris()) {
+            if (i.etrePresent(pj.getX(), pj.getY()) && !i.getEstPris()) {
                 pj.inventaire.ajouterObjet(i);
                 i.setEstPris();
-                System.out.println(i.getType() + " à été récupérer !\n" );
-            }else{
-                System.out.println("Pas d'objet a récupérer ici\n");
+                System.out.println(i.getType() + " a été récupéré !\n");
+            } else {
+                System.out.println("Pas d'objet à récupérer ici\n");
             }
         }
-
     }
 
     public ArrayList<Monstre> getMonstres() {
         return monstres;
     }
 
-    public Perso getPj(){
+    public Perso getPj() {
         return pj;
     }
 
-    public Fin getFin(){
+    public Fin getFin() {
         return fin;
     }
 
     public ArrayList<Monstre> getMonstresList() {
         return monstres;
     }
+
     public void setMonstresList(ArrayList<Monstre> monstres) {
         monstres.clear();
         for (Monstre m : monstres) {
@@ -372,6 +317,7 @@ public class Labyrinthe {
     public ArrayList<Objet> getObjetsList() {
         return objets;
     }
+
     public void setObjetsList(ArrayList<Objet> objets) {
         objets.clear();
         for (Objet o : objets) {
@@ -382,6 +328,7 @@ public class Labyrinthe {
     public ArrayList<Mur> getMursList() {
         return murs;
     }
+
     public void setMursList(ArrayList<Mur> murs) {
         murs.clear();
         for (Mur m : murs) {

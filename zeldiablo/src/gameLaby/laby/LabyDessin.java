@@ -12,6 +12,9 @@ import moteurJeu.Jeu;
 
 import java.util.ArrayList;
 
+/**
+ * La classe LabyDessin gère l'affichage du jeu
+ */
 public class LabyDessin implements DessinJeu {
 
 

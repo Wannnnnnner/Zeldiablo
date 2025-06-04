@@ -2,11 +2,22 @@ package gameLaby.laby;
 
 import java.util.Random;
 
+/**
+ * Classe abstraite représentant un monstre.
+ */
 public abstract class Monstre implements Entites {
     private final Labyrinthe laby;
     private int x, y, vie;
     private boolean traverse;
 
+    /**
+     * Instancie un nouveau monstre.
+     *
+     * @param x    la position en X
+     * @param y    la position en Y
+     * @param v    la quantité de vie du monstre
+     * @param laby le labyrinthe dans lequel se trouve le monstre
+     */
     public Monstre(int x, int y, int v, Labyrinthe laby) {
         this.x = x;
         this.y = y;
@@ -20,22 +31,45 @@ public abstract class Monstre implements Entites {
         return (this.x == x && this.y == y);
     }
 
+    /**
+     * Retourne la coordonnée X du monstre.
+     *
+     * @return la coordonnée X
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Définit la coordonnée X du monstre.
+     *
+     * @param x la nouvelle coordonnée X
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Retourne la coordonnée Y du monstre.
+     *
+     * @return la coordonnée Y
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Définit la coordonnée Y du monstre.
+     *
+     * @param y la nouvelle coordonnée Y
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * Déplace le monstre aléatoirement dans une des directions valides.
+     */
     public void deplacerRandom() {
         Random randX = new Random();
         Random randY = new Random();
@@ -76,18 +110,23 @@ public abstract class Monstre implements Entites {
         }
     }
 
-    ;
-
+    /**
+     * Vérifie s’il y a une collision à la position (x, y).
+     *
+     * @param x la position X à vérifier
+     * @param y la position Y à vérifier
+     * @return vrai si collision détectée, faux sinon
+     */
     Boolean verifColision(int x, int y) {
-        //verif mur
+        // Vérifie les murs
         if (laby.getMur(x, y)) {
             return true;
         }
-        //verif perso
+        // Vérifie la présence du personnage
         if (laby.getPj().getX() == x && laby.getPj().getY() == y) {
             return true;
         }
-        //verif monstre
+        // Vérifie la présence d'autres monstres
         for (Monstre m : laby.getMonstresList()) {
             if (m.getX() == x && m.getY() == y && m != this) {
                 return true;
@@ -96,16 +135,38 @@ public abstract class Monstre implements Entites {
         return false;
     }
 
+    /**
+     * Vérifie si le personnage est à la position (x, y).
+     *
+     * @param x la position X à vérifier
+     * @param y la position Y à vérifier
+     * @return vrai si le personnage est présent, faux sinon
+     */
     Boolean verifPerso(int x, int y) {
         return laby.getPj().getX() == x && laby.getPj().getY() == y;
     }
 
+    /**
+     * Méthode abstraite pour attaquer.
+     *
+     * @return les points de dégâts infligés
+     */
     public abstract int attaquer();
 
+    /**
+     * Applique des dégâts au monstre.
+     *
+     * @param pv les points de vie à retirer
+     */
     public void recevoirDegats(int pv){
-        this.vie-=pv;
+        this.vie -= pv;
     }
 
+    /**
+     * Retourne les points de vie restants du monstre.
+     *
+     * @return les points de vie
+     */
     public int getVie(){
         return vie;
     }
