@@ -11,4 +11,9 @@ public class MonstreSimple extends Monstre {
     public int attaquer() {
         return 1;
     }
+
+    public boolean getTraverse(){
+        return traverse;
+    }
+
 }
