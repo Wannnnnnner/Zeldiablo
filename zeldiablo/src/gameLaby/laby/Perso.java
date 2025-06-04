@@ -68,7 +68,7 @@ public class Perso implements Entites{
 
     public void recevoirDegats(int pv){
         if(getMeilleureBouclier()!=null){
-            int shield = getMeilleureBouclier().getProtection();
+            int shield = getMeilleureBouclier().getValeur();
             if(pv>shield){
                 inventaire.supprimerObjet(getMeilleureBouclier());
             }else{
@@ -83,9 +83,9 @@ public class Perso implements Entites{
         Bouclier meilleurBouclier = null;
         int maxTank = -1;
         for (Objet o : inventaire.getObjets()) {
-            if (o instanceof Bouclier bouclier && bouclier.getProtection() > maxTank) {
+            if (o instanceof Bouclier bouclier && bouclier.getValeur() > maxTank) {
                 meilleurBouclier = bouclier;
-                maxTank = bouclier.getProtection();
+                maxTank = bouclier.getValeur();
             }
         }
         return meilleurBouclier;

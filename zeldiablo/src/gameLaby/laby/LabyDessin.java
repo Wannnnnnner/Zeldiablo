@@ -74,11 +74,20 @@ public class LabyDessin implements DessinJeu {
                 if (!o.estPris) {
                     Image image;
                     if (o instanceof Epee) {
-                        image = new Image("file:labySimple/sword1.png");
+                        if(o.getValeur()>10){
+                            image = new Image("file:labySimple/sword2.png");
+                        }else{
+                            image = new Image("file:labySimple/sword1.png");
+                        }
+
                     } else if (o instanceof Bouclier) {
-                        image = new Image("file:labySimple/gemme.png");
+                        if(o.getValeur()>10){
+                            image = new Image("file:labySimple/shield2.png");
+                        }else {
+                            image = new Image("file:labySimple/shield1.png");
+                        }
                     } else {
-                        continue; // objet inconnu, on saute
+                        continue;
                     }
 
                     gc.setFill(new ImagePattern(image));

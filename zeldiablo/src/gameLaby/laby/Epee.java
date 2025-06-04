@@ -10,7 +10,8 @@ public class Epee extends Objet {
         this.description = "Une épée avec " + degats + " dégâts";
     }
 
-    public int getDegats() {
+    @Override
+    public int getValeur() {
         return degats;
     }
 

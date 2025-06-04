@@ -38,6 +38,10 @@ public class Objet implements Entites {
         return y;
     }
 
+    public int getValeur(){
+        return 0;
+    }
+
     public String toString() {
         return type + " " + description;
     }

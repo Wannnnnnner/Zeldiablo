@@ -10,7 +10,8 @@ public class Bouclier extends Objet {
         this.description = "Une bouclier avec " + protection + " de protection";
     }
 
-    public int getProtection() {
+    @Override
+    public int getValeur() {
         return protection;
     }
 
